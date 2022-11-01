@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect} from "react";
 import { Container, AppBar, Typography, Grow, Grid} from '@mui/material';
+import { useDispatch} from 'react-redux'
+import { getPosts } from './actions/posts'
 import Zoo from './Images/Zoo.jpg'
 import Posts from "./components/posts/Posts";
 import Form from "./components/forms/Form";
@@ -8,6 +10,11 @@ import { ThemeProvider, createMuiTheme, makeStyles } from '@mui/material/styles'
 
 const App = () => {
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getPosts());
+    }, [dispatch])
 
     return(
         
