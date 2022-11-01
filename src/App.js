@@ -3,14 +3,28 @@ import { Container, AppBar, Typography, Grow, Grid} from '@mui/material';
 import Zoo from './Images/Zoo.jpg'
 import Posts from "./components/posts/Posts";
 import Form from "./components/forms/Form";
+import { ThemeProvider, createMuiTheme, makeStyles } from '@mui/material/styles';
+
+
 const App = () => {
+
 
     return(
         
         <Container maxWidth='lg'>
-            <AppBar position="static" color="inherit">
-                <Typography variant="h2" align="center">Memories</Typography>
-                <img src={Zoo} alt="memories" height="500"/>
+            <AppBar sx={{
+             borderRadius: 15,
+             margin: '30px 0',
+             display: 'flex',
+             flexDirection: 'row',
+             justifyContent: 'center',
+             alignItems: 'center',
+             }} 
+             position="static" color="inherit">
+            <Typography sx={{color: 'rgba(0,183,255, 1)'}} variant="h2" align="center">Memories</Typography>
+            <img sx={{ image: {
+            marginLeft: '15px',
+            },}} src={Zoo} alt="memories" height="60"/>
             </AppBar>
 
             <Grow in>
