@@ -51,11 +51,11 @@ const Post = ({post, setCurrentId}) => {
                   justifyContent: 'space-between',
                   margin: '20px',}}> 
         
-        <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag}`)}</Typography>
+        <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => ` #${tag}`)}</Typography>
         </div>
         <Typography sx={{padding: '0 16px'}} variant="h5" gutterBottom>{post.title}</Typography>
         <CardContent>
-        <Typography sx={{padding: '0 16px'}} variant="h5" gutterBottom>{post.message}</Typography>
+        <Typography sx={{padding: '0 10px'}} variant="body2" color="textSecondary" component="p" >{post.message}</Typography>
         </CardContent>
 
         <CardActions sx={{padding: '0 16px 8px 16px',
@@ -63,7 +63,7 @@ const Post = ({post, setCurrentId}) => {
                           justifyContent: 'space-between',}}>
         <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
             <ThumbUpAltIcon fontSize="small"/>
-            Like
+            &nbsp; Like &nbsp;
             {post.likeCount}
         </Button>
 
