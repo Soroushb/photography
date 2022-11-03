@@ -1,8 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@mui/material";
 import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { createPost, updatePost } from "../../actions/posts";
 
 
@@ -17,9 +16,13 @@ const Form = ({currentId, setCurrentId}) => {
         selectedFile: ''
     })
 
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id == currentId) : null)
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null)
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(post) setPostData(post)
+    }, [post])
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -29,10 +32,16 @@ const Form = ({currentId, setCurrentId}) => {
         }else{
             dispatch(createPost(postData))
         }
+        clear();;
     }
 
     const clear = () => {
-
+        setCurrentId = null;
+        setPostData({creator: '',
+        title: '',
+        message: '',
+        tags: '',
+        selectedFile: ''})
         
     }
     return(
@@ -43,7 +52,7 @@ const Form = ({currentId, setCurrentId}) => {
                                             onSubmit={handleSubmit}>
 
             <Typography variant="h6">
-            Creating Memories
+             {currentId ? 'Editing' : 'Creating'}
             </Typography>
             <TextField name="creator" variant="outlined" label="Creator" fullWidthvalue={postData.creator} onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
             <TextField name="title" variant="outlined" label="Title" fullWidthvalue={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />

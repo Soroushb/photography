@@ -27,6 +27,7 @@ const Post = ({post, setCurrentId}) => {
         
         <Typography variant="h6">{post.creator}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+        </div>
         <div sx={{position: 'absolute',
              top: '20px',
              right: '20px',
@@ -36,6 +37,7 @@ const Post = ({post, setCurrentId}) => {
                 size="small" 
                 onClick={() => setCurrentId(post._id)}>
             <MoreHorizIcon fontSize="default"/>
+           
         </Button>
 
         </div>
@@ -43,8 +45,10 @@ const Post = ({post, setCurrentId}) => {
         <div sx={{display: 'flex',
                   justifyContent: 'space-between',
                   margin: '20px',}}> 
-    
+        
         <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag}`)}</Typography>
+        </div>
+        <Typography sx={{padding: '0 16px'}} variant="h5" gutterBottom>{post.title}</Typography>
         <CardContent>
         <Typography sx={{padding: '0 16px'}} variant="h5" gutterBottom>{post.message}</Typography>
         </CardContent>
@@ -52,7 +56,7 @@ const Post = ({post, setCurrentId}) => {
         <CardActions sx={{padding: '0 16px 8px 16px',
                           display: 'flex',
                           justifyContent: 'space-between',}}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button size="small" color="primary" onClick={() => setCurrentId(post._id)}>
             <ThumbUpAltIcon fontSize="small"/>
             Like
             {post.likeCount}
@@ -63,10 +67,6 @@ const Post = ({post, setCurrentId}) => {
             Delete
         </Button>
         </CardActions>
-
-        </div>
-
-        </div>
 
         </Card>
     )
