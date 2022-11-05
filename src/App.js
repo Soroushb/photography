@@ -6,6 +6,7 @@ import Zoo from './Images/Zoo.jpg'
 import Posts from "./components/posts/Posts";
 import Form from "./components/forms/Form";
 import { ThemeProvider, createMuiTheme, makeStyles } from '@mui/material/styles';
+import ResponsiveAppBar from "./components/header/header";
 
 
 const App = () => {
@@ -19,7 +20,9 @@ const App = () => {
 
     return(
         
-        <Container maxWidth='lg'>
+       <>
+            <ResponsiveAppBar/>
+            <Container maxWidth='lg'>
             <AppBar sx={{
              borderRadius: 15,
              margin: '30px 0',
@@ -32,7 +35,7 @@ const App = () => {
             <Typography sx={{color: 'rgba(0,183,255, 1)'}} variant="h2" align="center">Memories</Typography>
             <img sx={{ image: {
             marginLeft: '15px',
-            },}} src={Zoo} alt="memories" height="60"/>
+            },}} src={Zoo} alt="memories" width="700" height="400"/>
             </AppBar>
 
             <Grow in>
@@ -48,6 +51,8 @@ const App = () => {
                 </Container>
             </Grow>
         </Container>
+        </>
+
     )
 }
 
