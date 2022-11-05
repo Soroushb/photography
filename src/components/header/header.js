@@ -3,6 +3,7 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, 
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link} from 'react-router-dom'
+import Auth from '../Auth/Auth';
 
 const pages = ['Products', 'Pricing', 'Blog', 'Login'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -127,7 +128,7 @@ function ResponsiveAppBar() {
                 </div>
               ) : (
                   <Button 
-                   to="/auth" variant="contained" color="primary">
+                   to="/auth" component={Link} variant="contained" color="primary">
                   Sign in
                   </Button>
               )}
