@@ -2,9 +2,9 @@ import React from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
+import {Link} from 'react-router-dom'
 
-
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Products', 'Pricing', 'Blog', 'Login'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -25,6 +25,8 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const user = null;
 
   return (
     <AppBar position="static">
@@ -115,6 +117,21 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+
+          <Toolbar>
+              {user ? (
+                <div>    
+                    <Avatar alt="Soroush Bahrami" src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+                    <Typography variant="h6">{user.result.name}</Typography>
+                    <Button variant="contained" color="secondary">Logout</Button>
+                </div>
+              ) : (
+                  <Button 
+                   to="/auth" variant="contained" color="primary">
+                  Sign in
+                  </Button>
+              )}
+          </Toolbar>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
