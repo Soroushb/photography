@@ -19,6 +19,7 @@ const Post = ({post, setCurrentId}) => {
         className="postCard"
         sx={{display: 'flex',
         flexDirection: 'column',
+       // width: '25vw',
         justifyContent: 'space-between',
         borderRadius: '10px',
         height: '100%',
@@ -43,9 +44,12 @@ const Post = ({post, setCurrentId}) => {
         sx={{position: 'absolute',
                   top: '20px',
                   left: '20px',
-                  color: 'white',}}>
+                  color: 'white',
+                  display: 'flex',
+                  justifyContent: "center",
+                  }}>
         
-        <Typography className="cardText" variant="h6">{post.creator}</Typography>
+        <Typography className="cardText"  variant="h6">By {post.creator}</Typography>
         <Typography className="cardText" variant="body2">{moment(post.createdAt).fromNow()}</Typography>
         </div>
         <div 
@@ -58,22 +62,23 @@ const Post = ({post, setCurrentId}) => {
         <Button style={{color: 'white'}} 
                 size="small" 
                 onClick={() => setCurrentId(post._id)}>
+            Edit
             <MoreHorizIcon fontSize="default"/>
            
         </Button>
 
         </div>
         
-        <div sx={{display: 'flex',
+        <div className="postCard" sx={{display: 'flex',
                   justifyContent: 'space-between',
                   margin: '20px',}}> 
         
         <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => ` #${tag}`)}</Typography>
         </div>
-        <Typography sx={{padding: '0 16px'}} variant="h5" gutterBottom>{post.title}</Typography>
+        <Typography className="postCard" sx={{padding: '0 16px'}} variant="h5" gutterBottom>{post.title}</Typography>
     
 
-        <CardActions      className="postCard"
+        <CardActions  className="postCard"
                           sx={{padding: '0 16px 8px 16px',
                           display: 'flex',
                           justifyContent: 'space-between',}}>
