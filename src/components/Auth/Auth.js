@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@mui/material'
+import { GoogleLogin } from 'react-google-login'
 import Lock from '@mui/icons-material/Lock'
 import Input from './Input'
+import Icon from './Icon'
 
 const Auth = () => {
     const state = null
@@ -23,7 +25,7 @@ const Auth = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-        <Paper elevation={3}>
+        <Paper elevation={3} >
             <Avatar>
                 <Lock/>
             </Avatar>
@@ -43,6 +45,11 @@ const Auth = () => {
                     <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
                     { isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
                 </Grid>
+                <GoogleLogin clientId='GoogleID' render={(renderProps) => (
+                  <Button color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">
+                    Google Sign In
+                  </Button>
+                )}/>
                 <Button type="submit" fullWidth variant="contained" color="primary">
                 { isSignUp ? 'Sign Up' : 'Sign In' }
           </Button>
