@@ -2,22 +2,34 @@ import React, {useState} from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@mui/material'
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
+import { signIn, signUp} from '../../actions/auth'
 import Lock from '@mui/icons-material/Lock'
 import Input from './Input'
 import Icon from './Icon'
+
+const initialState = { firstName: '', lastName:'', email:'', password: '', confirmPassword: ''}
 
 const Auth = () => {
     const state = null
     const [showPassword, setShowPassword] = useState(false)
     const [isSignUp, setIsSignUp] = useState(false)
+    const [formData, setFormData] = useState(initialState)
     const dispatch = useDispatch();
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+      e.preventDefault();
 
+      if(isSignUp) {
+        dispatch(signUp(formData, history))
+      }else{
+        dispatch(signIn(formData, history))
+
+      }
+      console.log(formData)
     }
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+      setFormData({...formData, [e.target.name]: e.target.value})
     }
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
@@ -34,7 +46,7 @@ const Auth = () => {
       try{
         
         dispatch({type: 'AUTH', data: {result, token}})
-        
+
       }catch(error){
         console.log(error)
       }
@@ -56,8 +68,8 @@ const Auth = () => {
                     {
                         isSignUp && (
                             <>
-                                <Input name="firstName" label="FirstName" handleChange={handleChange} autoFocus half/>
-                                <Input name="firstName" label="FirstName" handleChange={handleChange} xs={6}/>
+                                <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half/>
+                                <Input name="lastName" label="Last Name" handleChange={handleChange} xs={6}/>
 
                             </>
                         )
