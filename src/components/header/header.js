@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
-import {Link} from 'react-router-dom'
+import {Link, Navigate, useLocation} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Auth from '../Auth/Auth';
 
 const pages = ['Products', 'Pricing', 'Blog', 'Login'];
@@ -19,6 +21,14 @@ function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
+  const location = useLocation();
+
+
+  useEffect(() => {
+    const token = user?.token;
+    setUser(JSON.parse(localStorage.getItem('profile')))
+  }, [location])
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -27,7 +37,17 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const user = null;
+  const logout = () => {
+    dispatch({type: 'LOGOUT'})
+    navigate('/')
+    setUser(null)
+  }
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  console.log(user);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <AppBar position="static">
@@ -122,9 +142,7 @@ function ResponsiveAppBar() {
           <Toolbar>
               {user ? (
                 <div>    
-                    <Avatar alt="Soroush Bahrami" src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
                     <Typography variant="h6">{user.result.name}</Typography>
-                    <Button variant="contained" color="secondary">Logout</Button>
                 </div>
               ) : (
                   <Button 
@@ -135,11 +153,16 @@ function ResponsiveAppBar() {
           </Toolbar>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Soroush Bahrami" src="/images/Soroush2" />
-              </IconButton>
-            </Tooltip>
+              {user && (
+                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                 <Button sx={{marginRight: "10px"}} variant="contained" color="secondary" onClick={logout}>Logout</Button>
+                 <Tooltip title="Open settings">
+                 <Avatar alt="Soroush Bahrami" src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+                 </Tooltip>
+                 </IconButton>
+              )}
+             
+            
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

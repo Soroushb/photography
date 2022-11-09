@@ -25,7 +25,6 @@ const Auth = () => {
         dispatch(signUp(formData, navigate))
       }else{
         dispatch(signIn(formData, navigate))
-
       }
       console.log(formData)
     }
@@ -48,6 +47,7 @@ const Auth = () => {
       try{
         
         dispatch({type: 'AUTH', data: {result, token}})
+        navigate('/')
 
       }catch(error){
         console.log(error)
@@ -86,8 +86,8 @@ const Auth = () => {
                   </Button>
                 )} onSuccess={googleSuccess} onFailure={googleFailure} cookiePolicy="single_host_origin"/>
 
-                <Button type="submit" fullWidth variant="contained" color="primary">
-                { isSignUp ? 'Sign Up' : 'Sign In' }
+                <Button type="submit" fullWidth variant="contained" color="primary" >
+                { isSignUp ? 'Sign Up' : 'Sign In'  }
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
