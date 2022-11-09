@@ -3,6 +3,7 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
 import { signIn, signUp} from '../../actions/auth'
+import { useNavigate } from "react-router-dom";
 import Lock from '@mui/icons-material/Lock'
 import Input from './Input'
 import Icon from './Icon'
@@ -15,14 +16,15 @@ const Auth = () => {
     const [isSignUp, setIsSignUp] = useState(false)
     const [formData, setFormData] = useState(initialState)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
       e.preventDefault();
 
       if(isSignUp) {
-        dispatch(signUp(formData, history))
+        dispatch(signUp(formData, navigate))
       }else{
-        dispatch(signIn(formData, history))
+        dispatch(signIn(formData, navigate))
 
       }
       console.log(formData)
@@ -36,7 +38,7 @@ const Auth = () => {
 
     const switchMode = () => {
         setIsSignUp((prevSignUp) => !prevSignUp)
-        handleShowPassword(false)
+        setShowPassword(false)
     }
 
     const googleSuccess = async (res) => {
