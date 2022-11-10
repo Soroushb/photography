@@ -9,7 +9,6 @@ import { createPost, updatePost } from "../../actions/posts";
 const Form = ({currentId, setCurrentId}) => {
 
     const [postData, setPostData] = useState({
-        creator: '',
         title: '',
         message: '',
         tags: '',
@@ -17,27 +16,36 @@ const Form = ({currentId, setCurrentId}) => {
     })
 
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null)
-
+    const user = JSON.parse(localStorage.getItem('profile'))
     const dispatch = useDispatch();
 
     useEffect(() => {
         if(post) setPostData(post)
     }, [post])
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
 
         if(currentId){
-            dispatch(updatePost(currentId, postData))
+            dispatch(updatePost({...postData, name: user?.result?.name}))
         }else{
-            dispatch(createPost(postData))
+            dispatch(createPost({...postData, name: user?.result?.name}))
         }
         clear();
     }
 
+    if(!user?.result?.name){
+        return(
+        <Paper>
+            <Typography variant="h6" align="center">
+                Please Sign In
+            </Typography>
+        </Paper>)
+    }
+
     const clear = () => {
         setCurrentId = null;
-        setPostData({creator: '',
+        setPostData({
         title: '',
         message: '',
         tags: '',
@@ -54,7 +62,6 @@ const Form = ({currentId, setCurrentId}) => {
             <Typography variant="h6">
              {currentId ? 'Editing' : 'Creating'}
             </Typography>
-            <TextField name="creator" variant="outlined" label="Creator" fullWidthvalue={postData.creator} onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
             <TextField name="title" variant="outlined" label="Title" fullWidthvalue={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
             <TextField name="message" variant="outlined" label="Message" fullWidthvalue={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
             <TextField name="tags" variant="outlined" label="Tags" fullWidthvalue={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />

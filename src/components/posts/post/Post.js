@@ -49,7 +49,7 @@ const Post = ({post, setCurrentId}) => {
                   justifyContent: "center",
                   }}>
         
-        <Typography className="cardText"  variant="h6">By {post.creator}</Typography>
+        <Typography className="cardText"  variant="h6">By {post.name}</Typography>
         <Typography className="cardText" variant="body2">{moment(post.createdAt).fromNow()}</Typography>
         </div>
         <div 
