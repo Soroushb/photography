@@ -6,6 +6,7 @@ import {Link, Navigate, useLocation} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Auth from '../Auth/Auth';
+import decode from 'jwt-decode'
 
 const pages = ['Products', 'Pricing', 'Blog', 'Login'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -26,6 +27,15 @@ function ResponsiveAppBar() {
 
   useEffect(() => {
     const token = user?.token;
+
+    if(token){
+      const decodedToken = decode(token)
+      
+      if(decodedToken.exp * 1000 < new Date().getTime()){
+        logout()
+      }
+    }
+
     setUser(JSON.parse(localStorage.getItem('profile')))
   }, [location])
 
