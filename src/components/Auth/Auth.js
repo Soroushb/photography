@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@mui/material'
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
+import CircularProgress from '@mui/material/CircularProgress';
 import { signIn, signUp} from '../../actions/auth'
 import { useNavigate } from "react-router-dom";
 import Lock from '@mui/icons-material/Lock'
@@ -15,6 +16,7 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [isSignUp, setIsSignUp] = useState(false)
     const [formData, setFormData] = useState(initialState)
+    const [isLoading, setIsLoading] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -24,7 +26,15 @@ const Auth = () => {
       if(isSignUp) {
         dispatch(signUp(formData, navigate))
       }else{
+
+        setIsLoading(true)
         dispatch(signIn(formData, navigate))
+
+        setTimeout(
+          function() {
+            setIsLoading(false)
+            window.location.reload(false);
+          }, 3000);
       }
       console.log(formData)
     }
@@ -88,7 +98,8 @@ const Auth = () => {
 
                 <Button type="submit" fullWidth variant="contained" color="primary" >
                 { isSignUp ? 'Sign Up' : 'Sign In'  }
-          </Button>
+                </Button>
+                {isLoading && <CircularProgress />}
           <Grid container justify="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
