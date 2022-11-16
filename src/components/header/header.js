@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import {Link, Navigate, useLocation} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -11,9 +13,12 @@ import decode from 'jwt-decode'
 const pages = ['Products', 'Pricing', 'Blog', 'Login'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -48,9 +53,15 @@ function ResponsiveAppBar() {
   };
 
   const logout = () => {
+    setIsLoading(true)
     dispatch({type: 'LOGOUT'})
     navigate('/')
     setUser(null)
+    setTimeout(
+      function() {
+        window.location.reload(false);
+        setIsLoading(false)
+      }, 3000);
   }
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -60,6 +71,7 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
 
   return (
+    
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -81,14 +93,14 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-
+          
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={()=>{}}
               color="inherit"
             >
               <MenuIcon />
@@ -149,6 +161,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
+        
           <Toolbar>
               {user ? (
                 <div>    
@@ -161,11 +174,12 @@ function ResponsiveAppBar() {
                   </Button>
               )}
           </Toolbar>
-
+          
           <Box sx={{ flexGrow: 0 }}>
               {user && (
-                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                 <IconButton onClick={()=>{}} sx={{ p: 0 }}>
                  <Button sx={{marginRight: "10px"}} variant="contained" color="secondary" onClick={logout}>Logout</Button>
+                 
                  <Tooltip title="Open settings">
                  <Avatar alt="Soroush Bahrami" src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
                  </Tooltip>

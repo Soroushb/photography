@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@mui/material'
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
@@ -20,6 +20,7 @@ const Auth = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
     const handleSubmit = (e) => {
       e.preventDefault();
 
@@ -33,6 +34,7 @@ const Auth = () => {
         setTimeout(
           function() {
             setIsLoading(false)
+            navigate("/")
             window.location.reload(false);
           }, 3000);
       }
@@ -70,7 +72,12 @@ const Auth = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-        <Paper elevation={3} >
+        <Paper sx={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    }} 
+    elevation={3} >
             <Avatar>
                 <Lock/>
             </Avatar>
@@ -80,7 +87,7 @@ const Auth = () => {
                     {
                         isSignUp && (
                             <>
-                                <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half/>
+                                <Input name="firstName" label="First Name" handleChange={handleChange}  autoFocus half/>
                                 <Input name="lastName" label="Last Name" handleChange={handleChange} xs={6}/>
 
                             </>
@@ -90,18 +97,23 @@ const Auth = () => {
                     <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
                     { isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
                 </Grid>
-                <GoogleLogin clientId='288654655104-la6t0qnaat20cgt6ivdil5agtul1nd3e.apps.googleusercontent.com' render={(renderProps) => (
-                  <Button color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">
+                <GoogleLogin  clientId='288654655104-la6t0qnaat20cgt6ivdil5agtul1nd3e.apps.googleusercontent.com' render={(renderProps) => (
+                  <Button sx={{width: '100%', marginTop: '3px'}} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">
                     Google Sign In
                   </Button>
                 )} onSuccess={googleSuccess} onFailure={googleFailure} cookiePolicy="single_host_origin"/>
 
-                <Button type="submit" fullWidth variant="contained" color="primary" >
+                <Button sx={{width: '100%', marginTop: '3px'}} type="submit" fullWidth variant="contained" color="primary" >
                 { isSignUp ? 'Sign Up' : 'Sign In'  }
                 </Button>
-                {isLoading && <CircularProgress />}
-          <Grid container justify="flex-end">
-            <Grid item>
+                
+          <Grid container justify="flex-end" sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                }}>
+                  {isLoading && <CircularProgress />}
+            <Grid item >
               <Button onClick={switchMode}>
                 { isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
               </Button>
