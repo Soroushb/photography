@@ -70,7 +70,7 @@ const Post = ({post, setCurrentId}) => {
         <div 
             className="postCard"
             sx={{position: 'absolute',
-             top: '20px',
+             top: '19px',
              right: '20px',
              color: 'white',}}>
 
