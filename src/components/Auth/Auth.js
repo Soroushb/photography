@@ -1,17 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@mui/material'
+import { Avatar, Button, Paper, Grid, Typography} from '@mui/material'
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
 import { signIn, signUp} from '../../actions/auth'
 import { useNavigate } from "react-router-dom";
-import { spacing } from '@mui/system';
-import Lock from '@mui/icons-material/Lock'
 import Input from './Input'
-import Icon from './Icon'
 import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -98,7 +93,7 @@ const Auth = () => {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: 'url(https://source.unsplash.com/random)',
+              backgroundImage: 'url("https://drive.google.com/uc?export=view&id=1E1w1GatAiXO3nVkTuYNvO0lgrV-NQQ7-")',
               backgroundRepeat: 'no-repeat',
               backgroundColor: (t) =>
                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
