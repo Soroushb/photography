@@ -5,11 +5,21 @@ import { useDispatch } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
 import { signIn, signUp} from '../../actions/auth'
 import { useNavigate } from "react-router-dom";
+import { spacing } from '@mui/system';
 import Lock from '@mui/icons-material/Lock'
 import Input from './Input'
 import Icon from './Icon'
+import CssBaseline from '@mui/material/CssBaseline';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const initialState = { firstName: '', lastName:'', email:'', password: '', confirmPassword: ''}
+
+const theme = createTheme();
 
 const Auth = () => {
     const state = null
@@ -25,7 +35,15 @@ const Auth = () => {
       e.preventDefault();
 
       if(isSignUp) {
+        setIsLoading(true)
         dispatch(signUp(formData, navigate))
+        setTimeout(
+          function() {
+            setIsLoading(false)
+            navigate("/")
+            window.location.reload(false);
+          }, 3000);
+
       }else{
 
         setIsLoading(true)
@@ -70,59 +88,126 @@ const Auth = () => {
       console.log("Google Sign in was unsuccessful.")
     }
 
-  return (
-    <Container component="main" maxWidth="xs">
-        <Paper sx={{
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    }} 
-    elevation={3} >
-            <Avatar>
-                <Lock/>
-            </Avatar>
-            <Typography variant='h5'>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
-            <form sx={{width: '100%', marginTop: '3px'}} onSubmit={handleSubmit}>
-                <Grid container spacing={2}>
-                    {
-                        isSignUp && (
-                            <>
-                                <Input name="firstName" label="First Name" handleChange={handleChange}  autoFocus half/>
-                                <Input name="lastName" label="Last Name" handleChange={handleChange} xs={6}/>
-
-                            </>
-                        )
-                    }
-                    <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
-                    <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-                    { isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
-                </Grid>
-                <GoogleLogin  clientId='288654655104-la6t0qnaat20cgt6ivdil5agtul1nd3e.apps.googleusercontent.com' render={(renderProps) => (
-                  <Button sx={{width: '100%', marginTop: '3px'}} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">
-                    Google Sign In
-                  </Button>
-                )} onSuccess={googleSuccess} onFailure={googleFailure} cookiePolicy="single_host_origin"/>
-
-                <Button sx={{width: '100%', marginTop: '3px'}} type="submit" fullWidth variant="contained" color="primary" >
-                { isSignUp ? 'Sign Up' : 'Sign In'  }
-                </Button>
-                
-          <Grid container justify="flex-end" sx={{
+    return (
+      <ThemeProvider theme={theme}>
+        <Grid container component="main" sx={{ height: '100vh' }}>
+          <CssBaseline />
+          <Grid
+            item
+            xs={false}
+            sm={4}
+            md={7}
+            sx={{
+              backgroundImage: 'url(https://source.unsplash.com/random)',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: (t) =>
+                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+            <Box
+              sx={{
+                my: 8,
+                mx: 4,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                }}>
-                  {isLoading && <CircularProgress />}
-            <Grid item >
-              <Button onClick={switchMode}>
-                { isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
-              </Button>
-            </Grid>
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography sx={{ marginBottom: '1rem' }} component="h1" variant="h5">
+                {isSignUp ? "Sign Up" : "Sign In"}
+              </Typography>
+              <form  onSubmit={handleSubmit} sx={{ mt: 1 }}>
+
+              {
+                        isSignUp && (
+                            <>
+                                <Input 
+                                  required 
+                                  fullWidth 
+                                  name="firstName" 
+                                  label="First Name" 
+                                  autoFocus
+                                  handleChange={handleChange}  
+                                  />
+
+                                <Input 
+                                  margin='normal' 
+                                  required 
+                                  fullWidth 
+                                  name="lastName" 
+                                  label="Last Name" 
+                                  handleChange={handleChange}/>
+
+                            </>
+                        )
+                }
+                <Input
+                  sx={{ marginTop: '5rem' }}
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  handleChange={handleChange}
+                />
+                <Input
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  id="password"
+                  type={showPassword ? 'text' : 'password'} 
+                  handleShowPassword={handleShowPassword}
+                  autoComplete="current-password"
+                  handleChange={handleChange}
+                />
+
+                { isSignUp && 
+                <Input 
+                margin="normal"
+                required
+                fullWidth
+                name="confirmPassword" 
+                label="Confirm Password" 
+                handleChange={handleChange} 
+                type="password" /> }
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                { isSignUp ? 'Sign Up' : 'Sign In'  } 
+                </Button>
+                {isLoading && <CircularProgress/>}
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Button  onClick={switchMode} variant="body2">
+                      {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign Up"}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Box>
           </Grid>
-            </form>
-        </Paper>
-    </Container>
-  )
+        </Grid>
+      </ThemeProvider>
+    );
 }
 
 export default Auth

@@ -34,15 +34,11 @@ const Post = ({post, setCurrentId}) => {
         flexDirection: 'column',
        // width: '25vw',
         justifyContent: 'space-between',
-        borderRadius: '10px',
         height: '100%',
         position: 'relative',}}>
-
         <a target="_blank" href={post.selectedFile}>
         <CardMedia sx={{height: 0,
-        paddingTop: '56.25%',
-        //backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        //backgroundBlendMode: 'darken',
+        paddingTop: '100%',
         }}
          image={post.selectedFile} title={post.title}
          
