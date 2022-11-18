@@ -28,6 +28,7 @@ const Post = ({post, setCurrentId}) => {
 
     return(
         
+        
         <Card 
         className="postCard"
         sx={{display: 'flex',

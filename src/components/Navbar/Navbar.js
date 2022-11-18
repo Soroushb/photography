@@ -5,16 +5,21 @@ const Navbar = () => {
   return (
     <div>
         <AppBar sx={{
-        borderRadius: 15,
-        margin: '30px 0',
+        borderRadius: 5,
+        margin: '10px 0',
         display: 'flex',
+        minHeight: 400,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundImage: 'url("https://drive.google.com/uc?export=view&id=1ghNTy1wcGvwbs1DYCZOR0b1vYNbGBO_V")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        opacity: 0.85
         }} 
         position="static" color="inherit">
-       <Typography sx={{color: 'rgba(0,183,255, 1)'}} variant="h2" align="center">Memories</Typography>
-      
+        
+        <Typography variant="h1" sx={{color: "white"}}>Photography</Typography>
        </AppBar>
 </div>
   )
