@@ -198,7 +198,7 @@ const Auth = () => {
                   </Grid>
                   <Grid item>
                     <Button  onClick={switchMode} variant="body2">
-                      {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign Up"}
+                      {isSignUp ? 'Already have an account? Sign in ' : "Don't have an account? Sign Up"}
                     </Button>
                   </Grid>
                 </Grid>
