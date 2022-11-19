@@ -13,7 +13,6 @@ const Posts = ({setCurrentId}) => {
     console.log(posts)
     return(
         
-        
         !posts.length ? <CircularProgress/> : (
             <Grid sx={{display: 'flex', alignItems: 'center',}} container alignItems="stretch" spacing={3}>
                 {

@@ -3,7 +3,7 @@ import { TextField, Button, Typography, Paper } from "@mui/material";
 import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatePost } from "../../actions/posts";
-
+import {Link} from 'react-router-dom'
 
 
 const Form = ({currentId, setCurrentId}) => {
@@ -37,8 +37,8 @@ const Form = ({currentId, setCurrentId}) => {
     if(!user?.result?.name){
         return(
         <Paper>
-            <Typography variant="h6" align="center">
-                Please Sign In
+            <Typography variant="h6" align="center" to="/auth" component={Link}>
+                In order to post, you first need to sign in.
             </Typography>
         </Paper>)
     }
