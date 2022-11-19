@@ -2,12 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import {Link, Navigate, useLocation} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Auth from '../Auth/Auth';
 import decode from 'jwt-decode'
 
 const pages = ['Products', 'Pricing', 'Blog', 'Login'];
@@ -20,12 +17,6 @@ function ResponsiveAppBar() {
   const [isLoading, setIsLoading] = useState(false)
 
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const location = useLocation();
 
@@ -72,7 +63,7 @@ function ResponsiveAppBar() {
 
   return (
     
-    <AppBar position="static">
+    <AppBar sx={{backgroundColor: "#0F1626"}} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -91,7 +82,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Still-Shots
           </Typography>
           
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -131,24 +122,7 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
+         
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button

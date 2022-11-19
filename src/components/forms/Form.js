@@ -59,23 +59,19 @@ const Form = ({currentId, setCurrentId}) => {
                                             justifyContent: 'center',}}
                                             onSubmit={handleSubmit}>
 
-            <Typography variant="h6">
+            <Typography variant="h6" align="center">
              {currentId ? 'Editing' : 'Creating'}
             </Typography>
             <TextField name="title" variant="outlined" label="Title" fullWidthvalue={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
             <TextField name="message" variant="outlined" label="Message" fullWidthvalue={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
             <TextField name="tags" variant="outlined" label="Tags" fullWidthvalue={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
 
-            <div sx={{width: '97%', margin: '10px 0',}}>
+            <div sx={{width: '97%', margin: '10px 0' }}>
                 <FileBase type="file" multiple={false} onDone={({base64}) => setPostData({...postData, selectedFile: base64})}/>
             </div>
 
-            <Button sx={{marginBottom: 10,}} variant="contained" color="primary" size="large" type="submit" fullWidth>
-                Submit
-            </Button>
-
-            <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>
-                Clear
+            <Button sx={{marginBottom: 1, marginTop: 1, backgroundColor: "#FF533D"}} variant="contained" color="primary" size="large" type="submit" fullWidth>
+                POST
             </Button>
 
             </form>
