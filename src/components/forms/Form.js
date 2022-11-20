@@ -63,11 +63,10 @@ const Form = ({currentId, setCurrentId}) => {
             
             
             <Typography variant="h5" align="center" sx={{marginBottom: "0.5rem"}}>
-             {currentId ? 'Editing' : <CameraIcon sx={{scale: "1.5"}}/>}
+             {currentId ? 'Editing' : <CameraIcon sx={{scale: "1.5", padding: "0.7%", borderRadius: "30%", color: "white", backgroundColor: "#FF533D"}}/>}
             </Typography>
             <TextField sx={{marginBottom: "0.5rem"}} fullWidth name="title" variant="outlined" label="Title" fullWidthvalue={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
             <TextField sx={{marginBottom: "0.5rem"}} fullWidth name="message" variant="outlined" label="Message" fullWidthvalue={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
-            <TextField sx={{marginBottom: "0.5rem"}} fullWidth name="tags" variant="outlined" label="Tags" fullWidthvalue={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
 
             <div sx={{width: '97%', margin: '10px 0' }}>
                 <FileBase type="file" multiple={false} onDone={({base64}) => setPostData({...postData, selectedFile: base64})}/>

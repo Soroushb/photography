@@ -154,9 +154,6 @@ function ResponsiveAppBar() {
                  <IconButton onClick={()=>{}} sx={{ p: 0 }}>
                  <Button sx={{marginRight: "10px"}} variant="contained" color="secondary" onClick={logout}>Logout</Button>
                  
-                 <Tooltip title="Open settings">
-                 <Avatar alt="Soroush Bahrami" src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
-                 </Tooltip>
                  </IconButton>
               )}
              
