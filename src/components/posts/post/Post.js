@@ -4,6 +4,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpAltOutlined from '@mui/icons-material/ThumbUpAltOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import EditIcon from '@mui/icons-material/Edit';
 import moment from "moment"
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts";
@@ -59,8 +60,8 @@ const Post = ({post, setCurrentId}) => {
                   justifyContent: "center",
                   }}>
         
-        <Typography className="cardText"  variant="h6">By {post.name}</Typography>
-        <Typography className="cardText" variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+        <Typography variant="h6" sx={{color: "white", marginLeft: "0.5rem"}}>By {post.name}</Typography>
+        <Typography variant="body2" sx={{color: "#FF533D", marginLeft: "0.5rem"}}>{moment(post.createdAt).fromNow()}</Typography>
         </div>
         
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
@@ -74,20 +75,13 @@ const Post = ({post, setCurrentId}) => {
         <Button style={{color: 'white'}} 
                 size="small" 
                 onClick={() => setCurrentId(post._id)}>
+            <EditIcon sx={{color: "white", scale: "1.5", marginRight: "0.3rem"}} fontSize="default"/>
             Edit
-            <MoreHorizIcon fontSize="default"/>
-           
         </Button>
         </div>
         )}
         
-        <div className="postCard" sx={{display: 'flex',
-                  justifyContent: 'space-between',
-                  margin: '20px',}}> 
-        
-        <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => ` #${tag}`)}</Typography>
-        </div>
-        <Typography className="postCard" sx={{padding: '0 16px'}} variant="h5" gutterBottom>{post.title}</Typography>
+        <Typography className="postCard" sx={{padding: '0 16px', color: "white"}} variant="h5" gutterBottom>{post.title}</Typography>
     
 
         <CardActions  className="postCard"
