@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
-import AdbIcon from '@mui/icons-material/Adb';
+import CameraRollIcon from '@mui/icons-material/CameraRoll';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link, useLocation} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
@@ -66,7 +66,7 @@ function ResponsiveAppBar() {
     <AppBar sx={{backgroundColor: "#0F1626"}} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <CameraRollIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: "#FF533D" }} />
           <Typography
             variant="h6"
             noWrap
@@ -121,7 +121,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <CameraRollIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
