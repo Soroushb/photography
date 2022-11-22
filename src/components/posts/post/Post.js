@@ -65,7 +65,7 @@ const Post = ({post, setCurrentId}) => {
         </div>
         
         {(user?.result?._id === post?.creator) && (
-      
+          
         <div 
             className="postCard"
             sx={{position: 'absolute',
@@ -92,9 +92,10 @@ const Post = ({post, setCurrentId}) => {
         <Button sx={{color: "white"}} size="small" disabled={!user?.result} color="primary" onClick={() => dispatch(likePost(post._id))}>
             <Likes/>
         </Button>
-        {console.log(user?.result?._id + " " + post?.creator + post?.createdAt)}
-        {(user?.result?._id === post?.creator) && (
-        <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+        {console.log(user?.result?._id + " " + post?.creator)}
+        {(user?.result?._id !== post?.creator) && (
+        <Button size="small" color="primary" onClick={() => {dispatch(deletePost(post._id)) 
+                                                              console.log(post.creator)}}>
             <DeleteIcon fontSize="small"/>
             Delete
         </Button>
