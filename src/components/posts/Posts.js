@@ -14,7 +14,7 @@ const Posts = ({setCurrentId}) => {
     return(
         
         !posts.length ? <CircularProgress/> : (
-            <Grid sx={{display: 'flex', alignItems: 'center',}} container alignItems="stretch" spacing={3}>
+            <Grid sx={{display: 'flex', alignItems: 'center',}} container direction="reverse" alignItems="stretch" spacing={3}>
                 {
                 
                     posts.map((post) => (

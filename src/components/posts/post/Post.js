@@ -1,9 +1,8 @@
 import React from "react";
-import { Card, CardActions, CardMedia, Button, Typography, Tab} from "@mui/material"
+import { Card, CardActions, CardMedia, Button, Typography} from "@mui/material"
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpAltOutlined from '@mui/icons-material/ThumbUpAltOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
 import moment from "moment"
 import { useDispatch } from "react-redux";
@@ -93,10 +92,10 @@ const Post = ({post, setCurrentId}) => {
             <Likes/>
         </Button>
         {console.log(user?.result?._id + " " + post?.creator)}
-        {(user?.result?._id !== post?.creator) && (
+        {(user?.result?._id === post?.creator) && (
         <Button size="small" color="primary" onClick={() => {dispatch(deletePost(post._id)) 
-                                                              console.log(post.creator)}}>
-            <DeleteIcon fontSize="small"/>
+                                                             console.log(post.creator)}}>
+          <DeleteIcon fontSize="small"/>
             Delete
         </Button>
         )}

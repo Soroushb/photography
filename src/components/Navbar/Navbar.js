@@ -20,7 +20,6 @@ const Navbar = () => {
         }} 
         position="static" color="inherit">
         
-        <Typography variant="h1" sx={{color: "white"}}>STILL-SHOTS</Typography>
        </AppBar>
 </div>
   )
