@@ -64,7 +64,8 @@ const Post = ({post, setCurrentId}) => {
         <Typography variant="body2" sx={{color: "#FF533D", marginLeft: "0.5rem"}}>{moment(post.createdAt).fromNow()}</Typography>
         </div>
         
-        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+        {(user?.result?._id === post?.creator) && (
+      
         <div 
             className="postCard"
             sx={{position: 'absolute',
@@ -91,7 +92,8 @@ const Post = ({post, setCurrentId}) => {
         <Button sx={{color: "white"}} size="small" disabled={!user?.result} color="primary" onClick={() => dispatch(likePost(post._id))}>
             <Likes/>
         </Button>
-        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+        {console.log(user?.result?._id + " " + post?.creator + post?.createdAt)}
+        {(user?.result?._id === post?.creator) && (
         <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
             <DeleteIcon fontSize="small"/>
             Delete
