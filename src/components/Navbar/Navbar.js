@@ -8,7 +8,7 @@ const Navbar = () => {
         borderRadius: 5,
         margin: '10px 0',
         display: 'flex',
-        minHeight: 350,
+        minHeight: 200,
         marginBottom: '20px',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -20,6 +20,7 @@ const Navbar = () => {
         }} 
         position="static" color="inherit">
         
+        <Typography variant="h1" align="center" sx={{color: "white", opacity: 0.7}}>STILL-SHOTS</Typography>
        </AppBar>
 </div>
   )

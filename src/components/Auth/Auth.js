@@ -128,7 +128,7 @@ const Auth = () => {
                                   name="firstName" 
                                   label="First Name" 
                                   autoFocus
-                                  handleChange={handleChange}  
+                                  handleChange={handleChange} 
                                   />
 
                                 <Input 
@@ -138,18 +138,19 @@ const Auth = () => {
                                   name="lastName" 
                                   label="Last Name" 
                                   handleChange={handleChange}/>
+                            
 
                             </>
                         )
                 }
                 <Input
-                  sx={{ marginTop: '5rem' }}
                   required
                   fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  type="email"
                   autoFocus
                   handleChange={handleChange}
                 />
@@ -186,11 +187,6 @@ const Auth = () => {
                 </Button>
                 {isLoading && <CircularProgress/>}
                 <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
                   <Grid item>
                     <Button  onClick={switchMode} variant="body2">
                       {isSignUp ? 'Already have an account? Sign in ' : "Don't have an account? Sign Up"}

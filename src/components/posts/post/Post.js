@@ -12,6 +12,7 @@ const Post = ({post, setCurrentId}) => {
 
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'))
+    const temp = false;
 
     const Likes = () => {
         if (post.likes.length > 0) {
@@ -59,12 +60,13 @@ const Post = ({post, setCurrentId}) => {
                   justifyContent: "center",
                   }}>
         
+        
+        <Typography className="postCard" align="center" sx={{ color: "white"}} variant="h4">{post.title}</Typography>
         <Typography variant="h6" sx={{color: "white", marginLeft: "0.5rem"}}>By {post.name}</Typography>
         <Typography variant="body2" sx={{color: "#FF533D", marginLeft: "0.5rem"}}>{moment(post.createdAt).fromNow()}</Typography>
         </div>
         
-        {(user?.result?._id === post?.creator) && (
-          
+        {temp && (
         <div 
             className="postCard"
             sx={{position: 'absolute',
@@ -81,8 +83,6 @@ const Post = ({post, setCurrentId}) => {
         </div>
         )}
         
-        <Typography className="postCard" sx={{padding: '0 16px', color: "white"}} variant="h5" gutterBottom>{post.title}</Typography>
-    
 
         <CardActions  className="postCard"
                           sx={{padding: '0 16px 8px 16px',

@@ -4,7 +4,9 @@ import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatePost } from "../../actions/posts";
 import CameraIcon from '@mui/icons-material/Camera';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import {Link} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 
 const Form = ({currentId, setCurrentId}) => {
@@ -18,6 +20,9 @@ const Form = ({currentId, setCurrentId}) => {
 
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null)
     const user = JSON.parse(localStorage.getItem('profile'))
+    const temp = false;
+
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -36,11 +41,15 @@ const Form = ({currentId, setCurrentId}) => {
         clear();
     }
 
+    const signInButton = () => {
+        navigate("/auth")
+    }
+
     if(!user?.result?.name){
         return(
-        <Paper>
-            <Typography variant="h6" align="center" to="/auth" component={Link}>
-                In order to post, you first need to sign in.
+        <Paper sx={{padding: "45px"}}>
+            <Typography variant="h6" align="center" >
+                In order to post or like other posts, you first need to sign in. <br/><br/><Button  onClick={() => signInButton()} sx={{backgroundColor: "#FF533D", color: "black", fontSize: "0.9"}}>Sign in</Button>
             </Typography>
         </Paper>)
     }
@@ -64,10 +73,10 @@ const Form = ({currentId, setCurrentId}) => {
             
             
             <Typography variant="h5" align="center" sx={{marginBottom: "0.5rem"}}>
-             {currentId ? 'Editing' : <CameraIcon sx={{scale: "1.5", padding: "0.7%", borderRadius: "30%", color: "white", backgroundColor: "#FF533D"}}/>}
+             {currentId ? <ModeEditIcon sx={{scale: "1.5", padding: "0.7%", borderRadius: "30%", color: "white", backgroundColor: "#FF533D"}}/> : <CameraIcon sx={{scale: "1.5", padding: "0.7%", borderRadius: "30%", color: "white", backgroundColor: "#FF533D"}}/>}
             </Typography>
-            <TextField sx={{marginBottom: "0.5rem"}} fullWidth name="title" variant="outlined" label="Title" fullWidthvalue={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
-            <TextField sx={{marginBottom: "0.5rem"}} fullWidth name="message" variant="outlined" label="Message" fullWidthvalue={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
+            <TextField sx={{marginBottom: "0.5rem", marginTop: "0.5rem"}} fullWidth name="title" variant="outlined" label="Title or Location" fullWidthvalue={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
+            {temp && (<TextField sx={{marginBottom: "0.5rem"}} fullWidth name="message" variant="outlined" label="Message" fullWidthvalue={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />)}
 
             <div sx={{width: '97%', margin: '10px 0' }}>
                 <FileBase type="file" multiple={false} onDone={({base64}) => setPostData({...postData, selectedFile: base64})}/>
