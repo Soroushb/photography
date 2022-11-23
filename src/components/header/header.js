@@ -127,7 +127,7 @@ function ResponsiveAppBar() {
           <Toolbar>
               {user ? (
                 <div>    
-                    <Typography variant="h6">{user.result.name}</Typography>
+                     <Avatar sx={{ bgcolor: "#FF533D" }}>{user.result.name.charAt(0)}</Avatar>
                 </div>
               ) : (
                   <Button 
