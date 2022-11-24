@@ -61,7 +61,7 @@ const Post = ({post, setCurrentId}) => {
                   }}>
         
         
-        <Typography className="postCard" align="center" sx={{ color: "white"}} variant="h4">{post.title}</Typography>
+        <Typography className="postCard" align="center" sx={{ color: "white"}} variant="h5">{post.title}</Typography>
         <Typography variant="h6" sx={{color: "white", marginLeft: "0.5rem"}}>By {post.name}</Typography>
         <Typography variant="body2" sx={{color: "#FF533D", marginLeft: "0.5rem"}}>{moment(post.createdAt).fromNow()}</Typography>
         </div>

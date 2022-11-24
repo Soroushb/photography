@@ -19,9 +19,11 @@
     "react-dom": "^18.2.0",
     "react-file-base64": "^1.0.3",
     "react-google-login": "^5.2.2",
+    "react-icons": "^4.6.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-social-icons": "^5.15.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "web-vitals": "^2.1.4"
