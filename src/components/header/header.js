@@ -108,7 +108,7 @@ function ResponsiveAppBar() {
           <Toolbar>
               {user ? (
                 <div>    
-                     <Avatar sx={{ bgcolor: "#FF533D" }}>{user.result.name.charAt(0)}</Avatar>
+                     <Avatar to="/profile" component={Link} sx={{ bgcolor: "#FF533D" }}>{user.result.name.charAt(0)}</Avatar>
                 </div>
               ) : (
                   <Button 
