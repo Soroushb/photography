@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import decode from 'jwt-decode'
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
 import {Link, useLocation} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -44,7 +45,10 @@ const Profile = () => {
     
   return (
     <div>
-        {user.result.name}
+        <Box align="center">
+        <Avatar sx={{ bgcolor: "#FF533D", width: 80, height: 80  }}>{user.result.name.charAt(0)}</Avatar>
+        </Box>
+   
     </div>
   )
 }
