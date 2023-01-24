@@ -17,7 +17,7 @@ const Posts = ({setCurrentId}) => {
             <Grid sx={{display: 'flex', alignItems: 'center',}} container direction="reverse" alignItems="stretch" spacing={3}>
                 {
                 
-                    posts.map((post) => (
+                    posts.slice(0).reverse().map((post) => (
                         <Grid item key={post._id} xs={12} sm={6}>
                             <Post post={post} setCurrentId={setCurrentId}/>
                         </Grid>

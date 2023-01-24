@@ -83,7 +83,7 @@ const Home = () => {
                     <Pagination page={page}/>
                 </Paper>
         </Grid>
-        <Grid item xs={12} sm={6} md={9}>
+        <Grid direction="column-reverse" item xs={12} sm={6} md={9}>
                 <Posts setCurrentId={setCurrentId}/>
         </Grid>
             
