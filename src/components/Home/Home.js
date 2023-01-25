@@ -1,9 +1,9 @@
 import React,  { useState, useEffect}  from 'react'
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button} from '@mui/material';
 import {useNavigate, useLocation} from 'react-router-dom'
-import { getPosts, getPostsBySearch } from '../../actions/posts'
 import { useDispatch} from 'react-redux'
 import { MuiChipsInput } from 'mui-chips-input'
+import api from '../../artApi/movieApi'
 import Posts from '../posts/Posts';
 import Form from '../forms/Form';
 import Pagination from '../Pagination'
@@ -25,23 +25,20 @@ const Home = () => {
     const navigate = useNavigate();
     const page = query.get('page') || 1;
     const searchQuery = query.get('searchQuery')
+    let [movies, setMovies] = useState('')
 
     
-    const searchPost = () => {
 
-        if(search.trim() || tags) {
-            dispatch(getPostsBySearch({search, tags: tags.join(',')}))
-        }else{
-            navigate('/')
-        }
-    }
-
-    
-    const handleKeyPress = (e) => {
-
-        if(e.keyCode === 13){
-            searchPost()
-        }
+    const getData = () => {
+        
+        api.getMovies("spiderman")
+        .then((response)=>{
+            setMovies(response.data)
+            console.log(response)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
 
@@ -66,7 +63,6 @@ const Home = () => {
                     variant="outlined" 
                     label="Search Memories"
                     fullWidth
-                    onKeyPress={handleKeyPress}
                     value={search}
                     onChange={(e) => {setSearch(e.target.value)}}/>
                     <MuiChipsInput 
@@ -76,17 +72,17 @@ const Home = () => {
                     onDelete={handleDelete}
                     label="Search Tags"
                     variant="outlined"/>
-                    <Button onClick={searchPost} color="primary" variant="contained">Search</Button>
+                    <Button onClick={() => getData()} color="primary" variant="contained">Search</Button>
                 </AppBar>
+                
                 <Form currentId={currentId} setCurrentId={setCurrentId}/>
                 <Paper elevation={6}>
                     <Pagination page={page}/>
                 </Paper>
         </Grid>
-        <Grid direction="column-reverse" item xs={12} sm={6} md={9}>
+<Grid direction="column-reverse" item xs={12} sm={6} md={9}>
                 <Posts setCurrentId={setCurrentId}/>
         </Grid>
-            
         </Grid>
     </Container>
 </Grow>
