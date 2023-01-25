@@ -1,5 +1,5 @@
 import React,  { useState, useEffect}  from 'react'
-import { Container, Grow, Grid, Paper, AppBar, TextField, Button} from '@mui/material';
+import { Container, Grow, Grid, Paper, AppBar, TextField, Button, Card, CardActions, CardContent, CardMedia, Typography} from '@mui/material';
 import {useNavigate, useLocation} from 'react-router-dom'
 import { useDispatch} from 'react-redux'
 import { MuiChipsInput } from 'mui-chips-input'
@@ -17,7 +17,7 @@ function useQuery() {
 const Home = () => {
 
     
-    const [search, setSearch] = useState('');
+    const [searchMovie, setSearchMovie] = useState('');
     const [tags, setTags] = useState([]);
     const dispatch = useDispatch();
     const [currentId, setCurrentId] = useState(null);
@@ -29,12 +29,12 @@ const Home = () => {
 
     
 
-    const getData = () => {
+    const getData = (movieTitle) => {
         
-        api.getMovies("spiderman")
+        api.getMovies(movieTitle)
         .then((response)=>{
             setMovies(response.data)
-            console.log(response)
+            console.log(movies)
         })
         .catch((error) => {
             console.log(error)
@@ -61,18 +61,11 @@ const Home = () => {
                     <TextField 
                     name="search" 
                     variant="outlined" 
-                    label="Search Memories"
+                    label="Search For A Movie"
                     fullWidth
-                    value={search}
-                    onChange={(e) => {setSearch(e.target.value)}}/>
-                    <MuiChipsInput 
-                    sx={{margin: '10px 0'}}
-                    value={tags}
-                    onAdd={handleAdd}
-                    onDelete={handleDelete}
-                    label="Search Tags"
-                    variant="outlined"/>
-                    <Button onClick={() => getData()} color="primary" variant="contained">Search</Button>
+                    value={searchMovie}
+                    onChange={(e) => {setSearchMovie(e.target.value)}}/>
+                    <Button onClick={() => getData(searchMovie)} color="primary" variant="contained">Search</Button>
                 </AppBar>
                 
                 <Form currentId={currentId} setCurrentId={setCurrentId}/>
@@ -80,8 +73,27 @@ const Home = () => {
                     <Pagination page={page}/>
                 </Paper>
         </Grid>
-<Grid direction="column-reverse" item xs={12} sm={6} md={9}>
-                <Posts setCurrentId={setCurrentId}/>
+        <Grid direction="column-reverse" item xs={12} sm={6} md={9}>
+                {movies && (
+                    movies?.data?.search?.movies.map((movie) => (
+                        
+        <Card sx={{ maxWidth: 345, margin: 1 }}>
+      <CardMedia
+        component="img"
+        image={movie?.posterImage?.url}
+        alt={movie?.name}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {movie?.name}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Share</Button>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>        
+    )))}
         </Grid>
         </Grid>
     </Container>
