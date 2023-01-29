@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatePost } from "../../actions/posts";
 import CameraIcon from '@mui/icons-material/Camera';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import {Link} from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 
 

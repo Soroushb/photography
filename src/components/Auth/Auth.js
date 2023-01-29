@@ -1,13 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { Avatar, Button, Paper, Grid, Typography} from '@mui/material'
-import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
 import { signIn, signUp} from '../../actions/auth'
 import { useNavigate } from "react-router-dom";
 import Input from './Input'
 import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -17,7 +15,6 @@ const initialState = { firstName: '', lastName:'', email:'', password: '', confi
 const theme = createTheme();
 
 const Auth = () => {
-    const state = null
     const [showPassword, setShowPassword] = useState(false)
     const [isSignUp, setIsSignUp] = useState(false)
     const [formData, setFormData] = useState(initialState)
@@ -65,23 +62,6 @@ const Auth = () => {
         setShowPassword(false)
     }
 
-    const googleSuccess = async (res) => {
-      const result = res?.profileObj;
-      const token = res?.tokenId;
-
-      try{
-        
-        dispatch({type: 'AUTH', data: {result, token}})
-        navigate('/')
-
-      }catch(error){
-        console.log(error)
-      }
-    }
-
-    const googleFailure = () => {
-      console.log("Google Sign in was unsuccessful.")
-    }
 
     return (
       <ThemeProvider theme={theme}>

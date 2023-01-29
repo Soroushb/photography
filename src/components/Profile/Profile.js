@@ -1,28 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import decode from 'jwt-decode'
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
-import {Link, useLocation} from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { useSelector } from 'react-redux'
 import Post from "../posts/post/Post";
-import { Grid, CircularProgress } from "@mui/material"
+import { Grid, CircularProgress, Typography } from "@mui/material"
 
 
 const Profile = () => {
 
-    const location = useLocation();
-    const [isLoading, setIsLoading] = useState(false)
     const posts = useSelector((state) => state.posts)
     const user = JSON.parse(localStorage.getItem('profile'))
-      console.log(user);
-    
-      const dispatch = useDispatch();
-      const navigate = useNavigate();
+    console.log(user);
+
       
   return (
  
-    !posts.length ? <CircularProgress/> : (
+    <>
+    <Typography variant='h4'>Your Photos:</Typography>
+    {!posts.length ? <CircularProgress/> : (
       <Grid sx={{display: 'flex', alignItems: 'center',}} container direction="reverse" alignItems="stretch" spacing={3}>
           {
           
@@ -33,8 +26,9 @@ const Profile = () => {
               ))
           }
       </Grid>
-  
-  )
+     )}
+    </>
+    
 )
 }
 
